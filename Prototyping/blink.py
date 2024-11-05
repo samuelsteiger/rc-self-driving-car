@@ -7,7 +7,7 @@ GPIO.setwarnings(False)
 
 #Use a variable for the Pin to use
 
-led = 32
+led = 23
 #Initialize your pin
 GPIO.setup(led,GPIO.OUT)
 
