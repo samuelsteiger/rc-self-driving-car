@@ -20,6 +20,15 @@ class Node():  # Just an example of a base class
 
     def __str__(self):
         return self.draw_tree()
+    
+    def __eq__(self, value):
+        if not isinstance(self, Node):
+            return False
+        if self.point.x != value.point.x:
+            return False
+        if self.point.y != value.point.y:
+            return False
+        return True
 
     def draw_tree(self, depth = 0):
         root = f"({self.point.x},{self.point.y})"
