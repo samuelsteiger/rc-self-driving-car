@@ -8,7 +8,7 @@ class TwoDTree():
 
     def __str__(self):
         if self.root:
-            return self.root.__str__()
+            return self.root.draw_tree()
         else:
             return ""
 

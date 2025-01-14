@@ -19,7 +19,7 @@ class Node():  # Just an example of a base class
             self.lesser = node
 
     def __str__(self):
-        return self.draw_tree()
+        return f"({self.point.x},{self.point.y})"
     
     def __eq__(self, value):
         if not isinstance(self, Node):
