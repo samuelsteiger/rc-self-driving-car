@@ -17,7 +17,25 @@ class TestTwoDTree(unittest.TestCase):
         tree1.root.lesser.greater = Node(-2, 9)
         tree1.root.lesser.lesser = Node(-5,-7)
 
+        tree2 = TwoDTree()
+        tree2.random_fill(10)
+
+        tree3 = TwoDTree()
+        tree3.random_fill(1000)
+        
+        tree4 = TwoDTree()
+        tree4.root = Node(2,4)
+        tree4.root.greater = Node(3,-1)
+        tree4.root.lesser = Node(-8,0)
+        tree4.root.greater.greater = Node(5,-2)
+        tree4.root.greater.lesser = Node(7,-3)
+        tree4.root.lesser.greater = Node(-2, 9)
+        tree4.root.lesser.lesser = Node(-5,-7)
+
         self.assertTrue(is_valid_tree(tree1))
+        self.assertTrue(is_valid_tree(tree2))
+        self.assertTrue(is_valid_tree(tree3))
+        self.assertFalse(is_valid_tree(tree4))
 
     def test_insert(self):
         nodes = [
@@ -54,35 +72,32 @@ class TestTwoDTree(unittest.TestCase):
     def test_remove(self):
         pass
 
-def is_valid_tree(tree):
-    queue = []
-    queue.append(tree.root)
-    depth = 0
-    level_count = 1
-    while len(queue) > 0:
-        current_node = queue.pop(0)
-        if current_node.greater:
-            queue.append(current_node.greater)
-            if depth % 2 == 0:
-                if current_node.point.x >= current_node.greater.point.x:
-                    return False
-            else:
-                if current_node.point.y >= current_node.greater.point.y:
-                    return False
-        level_count+=1
-        if current_node.lesser:
-            queue.append(current_node.lesser)
-            if depth % 2 == 0:
-                if current_node.point.x < current_node.lesser.point.x:
-                    return False
-            else:
-                if current_node.point.y < current_node.lesser.point.y:
-                    return False
-        level_count+=1
-        if 2**(depth+1) < level_count:
-            depth+=1
-            level_count = 1
+#Recursive DFT of the tree to check each node is valid
+def is_valid_tree(node, depth = 0):
+    if isinstance(node, TwoDTree):
+        return is_valid_tree(node.root)
+    if not node:
+        return True
+    return is_valid_tree_node(node, depth) and is_valid_tree(node.greater, depth + 1) and is_valid_tree(node.lesser, depth + 1)
     
+
+def is_valid_tree_node(node, depth):
+    #x-aligned layer
+    if(depth % 2 == 0):
+        if node.greater:
+            if not (node.greater.point.x >= node.point.x):
+                return False
+        if node.lesser:
+            if not (node.lesser.point.x < node.point.x):
+                return False
+    #y-aligned layer
+    else:
+        if node.greater:
+            if not (node.greater.point.y >= node.point.y):
+                return False
+        if node.lesser:
+            if not (node.lesser.point.y < node.point.y):
+                return False
     return True
 
 if __name__ == "__main__":
