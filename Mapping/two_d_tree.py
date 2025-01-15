@@ -40,7 +40,23 @@ class TwoDTree():
         pass
 
     def exists(self, x, y):
-        pass
+        current_node = self.root
+        target_node = Node(x,y)
+        depth = 0
+        while current_node != target_node:
+            if target_node.is_greater_than_equal(current_node, depth):
+                if current_node.greater:
+                    current_node = current_node.greater
+                else:
+                    return False
+            else:
+                if current_node.lesser:
+                    current_node = current_node.lesser
+                else:
+                    return False
+            depth += 1
+        return True
+                    
 
     def random_fill(self, count, min = -5, max = 5):
         for i in range(count):

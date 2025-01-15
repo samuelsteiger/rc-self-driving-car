@@ -67,7 +67,22 @@ class TestTwoDTree(unittest.TestCase):
         self.assertTrue(is_valid_tree(tree))
 
     def test_exsits(self):
-        pass
+        tree1 = TwoDTree()
+        tree1.root = Node(2,4)
+        tree1.root.greater = Node(3,-1)
+        tree1.root.lesser = Node(-8,0)
+        tree1.root.greater.greater = Node(5,1)
+        tree1.root.greater.lesser = Node(7,-3)
+        tree1.root.lesser.greater = Node(-2, 9)
+        tree1.root.lesser.lesser = Node(-5,-7)
+
+        self.assertTrue(tree1.exists(2,4))
+        self.assertTrue(tree1.exists(5,1))
+        self.assertTrue(tree1.exists(-5,-7))
+        self.assertFalse(tree1.exists(9,-7))
+        self.assertFalse(tree1.exists(-5,7))
+
+        
 
     def test_remove(self):
         pass
