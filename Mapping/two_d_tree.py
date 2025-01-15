@@ -1,5 +1,6 @@
 from node import Node
 from shapely import Point
+from random import randint
 
 class TwoDTree():
     def __init__(self, margin = 0.1):
@@ -21,7 +22,7 @@ class TwoDTree():
         current_node = self.root
         depth = 0
         while True:
-            if current_node.is_less_than(node, depth):
+            if node.is_greater_than_equal(current_node, depth):
                 if current_node.greater:
                     current_node = current_node.greater
                 else:
@@ -40,11 +41,8 @@ class TwoDTree():
 
     def exists(self, x, y):
         pass
+
+    def random_fill(self, count, min = -5, max = 5):
+        for i in range(count):
+            self.insert(randint(min,max), randint(min,max))
     
-tree = TwoDTree()
-tree.insert(0,0)
-tree.insert(2,3)
-tree.insert(-4,-6)
-tree.insert(3,-9)
-tree.insert(0,0)
-print(tree)

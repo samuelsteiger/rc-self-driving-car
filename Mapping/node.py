@@ -21,6 +21,9 @@ class Node():  # Just an example of a base class
     def __str__(self):
         return f"({self.point.x},{self.point.y})"
     
+    def __repr__(self):
+        return f"NODE({self.point.x},{self.point.y})"
+    
     def __eq__(self, value):
         if not isinstance(self, Node):
             return False
@@ -45,4 +48,10 @@ class Node():  # Just an example of a base class
             return self.point.x < node.point.x
         else:
             return self.point.y < node.point.y
+        
+    def is_greater_than_equal(self, node, depth):
+        if depth % 2 == 0:
+            return self.point.x >= node.point.x
+        else:
+            return self.point.y >= node.point.y
     
