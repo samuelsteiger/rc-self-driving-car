@@ -32,6 +32,11 @@ class Node():  # Just an example of a base class
         if self.point.y != value.point.y:
             return False
         return True
+    
+    def swap(self, other):
+        temp = self.point
+        self.point = other.point
+        other.point = temp
 
     def draw_tree(self, depth = 0):
         root = f"({self.point.x},{self.point.y})"
