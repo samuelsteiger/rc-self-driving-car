@@ -13,6 +13,27 @@ class TwoDTree():
         else:
             return ""
 
+    def __eq__(self, value):
+        queue = []
+        #Test for empty trees
+        if not self.root:
+            if value.root:
+                return False
+            else:
+                return True
+        if not value.root:
+            return False
+        queue.append(self.root)
+        while len(queue) > 0:
+            current_node = queue.pop()
+            if not value.exists(current_node.point.x, current_node.point.y):
+                return False
+            if current_node.greater:
+                queue.append(current_node.greater)
+            if current_node.lesser:
+                queue.append(current_node.lesser)
+        return True
+
     def insert(self, x, y): 
         node = Node(x,y)
         if not self.root:

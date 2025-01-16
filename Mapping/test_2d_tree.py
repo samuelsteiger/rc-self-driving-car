@@ -82,7 +82,39 @@ class TestTwoDTree(unittest.TestCase):
         self.assertFalse(tree1.exists(9,-7))
         self.assertFalse(tree1.exists(-5,7))
 
-        
+    def test_equals(self):
+        tree1 = TwoDTree()
+        tree1.root = Node(2,4)
+        tree1.root.greater = Node(3,-1)
+        tree1.root.lesser = Node(-8,0)
+        tree1.root.greater.greater = Node(5,1)
+        tree1.root.greater.lesser = Node(7,-3)
+        tree1.root.lesser.greater = Node(-2, 9)
+        tree1.root.lesser.lesser = Node(-5,-7)
+
+        tree2 = TwoDTree()
+        tree2.root = Node(2,4)
+        tree2.root.greater = Node(3,-1)
+        tree2.root.lesser = Node(-8,0)
+        tree2.root.greater.greater = Node(5,1)
+        tree2.root.greater.lesser = Node(7,-3)
+        tree2.root.lesser.greater = Node(-2, 9)
+        tree2.root.lesser.lesser = Node(-5,-7)
+
+        tree3 = TwoDTree()
+        tree3.root = Node(2,4)
+        tree3.root.greater = Node(3,-1)
+        tree3.root.lesser = Node(-8,0)
+        tree3.root.greater.greater = Node(5,1)
+        tree3.root.greater.lesser = Node(7,-3)
+        tree3.root.lesser.greater = Node(-2, 9)
+
+        tree4 = TwoDTree()
+
+        self.assertTrue(tree1 == tree2)
+        self.assertFalse(tree1 == tree3)
+        self.assertFalse(tree4 == tree3)
+        self.assertFalse(tree1 == tree4)
 
     def test_remove(self):
         pass
