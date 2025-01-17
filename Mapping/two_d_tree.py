@@ -58,7 +58,45 @@ class TwoDTree():
             depth += 1
 
     def remove(self, x, y):
-        pass
+        #Find the target node
+        if not self.root:
+            return
+        current_node = self.root
+        previous_node = self.root
+        target_node = Node(x,y)
+        if self.root == target_node and not (self.root.greater or self.root.lesser):
+            self.root = None
+        depth = 0
+        while current_node != target_node:
+            if target_node.is_greater_than_equal(current_node, depth):
+                if current_node.greater:
+                    previous_node = current_node
+                    current_node = current_node.greater
+                else:
+                    return
+            else:
+                if current_node.lesser:
+                    previous_node = current_node
+                    current_node = current_node.lesser
+                else:
+                    return
+            depth += 1
+        depth -= 1
+        #Remove target node
+        while current_node.greater or current_node.lesser:
+            if current_node.greater:
+                current_node.swap(current_node.greater)
+                previous_node = current_node
+                current_node = current_node.greater
+            else:
+                current_node.swap(current_node.lesser)
+                previous_node = current_node
+                current_node = current_node.lesser
+        if previous_node.greater:
+            previous_node.greater = None
+        else:
+            previous_node.lesser = None
+
 
     def exists(self, x, y):
         current_node = self.root

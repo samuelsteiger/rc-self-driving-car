@@ -117,7 +117,36 @@ class TestTwoDTree(unittest.TestCase):
         self.assertFalse(tree1 == tree4)
 
     def test_remove(self):
-        pass
+        tree1 = TwoDTree()
+        tree1.insert(2,4)
+        tree1.insert(-8,0)
+        tree1.insert(3,-1)
+        tree1.insert(5,1)
+        tree1.insert(-2,9)
+        tree1.insert(7,-3)
+        tree1.insert(-5,-7)
+
+        tree2 = TwoDTree()
+        tree2.insert(-5,-7)
+
+        tree3 = TwoDTree()
+        tree3.insert(-8,0)
+        tree3.insert(3,-1)
+        tree3.insert(5,1)
+        tree3.insert(-2,9)
+        tree3.insert(7,-3)
+        tree3.insert(-5,-7)
+
+        tree1.remove(2,4)
+        self.assertEqual(tree1, tree3)
+
+        tree1.remove(-8,0)
+        tree1.remove(3,-1)
+        tree1.remove(5,1)
+        tree1.remove(-2,9)
+        tree1.remove(7,-3)
+        self.assertEqual(tree1, tree2)
+
 
 #Recursive DFT of the tree to check each node is valid
 def is_valid_tree(node, depth = 0):
