@@ -1,6 +1,6 @@
 from node import Node
 from shapely import Point
-from random import randint
+from random import random
 
 class TwoDTree():
     def __init__(self, margin = 0.1):
@@ -117,7 +117,7 @@ class TwoDTree():
         return True
                     
 
-    def random_fill(self, count, min = -5, max = 5):
+    def random_fill(self, count, min = -10, max = 10):
         for i in range(count):
-            self.insert(randint(min,max), randint(min,max))
+            self.insert(round(random(min,max),4), round(random(min,max),4))
     
