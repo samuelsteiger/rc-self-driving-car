@@ -1,4 +1,4 @@
-from node import Node
+from Mapping.node import Node
 from shapely import Point
 from random import random
 
