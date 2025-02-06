@@ -1,6 +1,7 @@
 import unittest
 from node import Node
 from two_d_tree import TwoDTree
+from shapely import Point
 
 class TestTwoDTree(unittest.TestCase):
 
@@ -147,6 +148,23 @@ class TestTwoDTree(unittest.TestCase):
         tree1.remove(7,-3)
         self.assertEqual(tree1, tree2)
 
+    def test_exists_in_area(self):
+        tree1 = TwoDTree()
+        tree1.root = Node(2,4)
+        tree1.root.greater = Node(3,-1)
+        tree1.root.lesser = Node(-8,0)
+        tree1.root.greater.greater = Node(5,1)
+        tree1.root.greater.lesser = Node(7,-3)
+        tree1.root.lesser.greater = Node(-2, 9)
+        tree1.root.lesser.lesser = Node(-5,-7)
+
+        rect1 = [Point(-3,5), Point(-1,4), Point(-2,2), Point(-4,2)]
+        rect2 = [Point(4,6), Point(1,6), Point(1,2), Point(4,2)]
+        rect3 = [Point(5,3), Point(3,3), Point(3,1), Point(5,1)]
+
+        self.assertFalse(tree1.exists_in_area(rect1))
+        self.assertTrue(tree1.exists_in_area(rect2))
+        self.assertTrue(tree1.exists_in_area(rect3))
 
 #Recursive DFT of the tree to check each node is valid
 def is_valid_tree(node, depth = 0):

@@ -1,6 +1,6 @@
-from Mapping.node import Node
-from shapely import Point
-from random import random
+from node import Node
+from shapely import Polygon
+from random import uniform
 
 class TwoDTree():
     def __init__(self, margin = 0.1):
@@ -115,9 +115,41 @@ class TwoDTree():
                     return False
             depth += 1
         return True
-                    
+
+    def exists_in_area(self, points):
+        queue = [(self.root, 0)]
+        area = Polygon(points)
+
+        while len(queue) > 0:
+            current_node, depth = queue.pop(0)
+            has_greater_equal = False
+            has_lesser = False
+
+            for point in points:
+                node = Node(point.x, point.y)
+                if current_node.is_greater_than_equal(node, depth):
+                    has_greater_equal = True
+                else:
+                    has_lesser = True
+            
+            #Current node is wholly greater/equal or lesser than the rectangle
+            if has_greater_equal ^ has_lesser:
+                if has_greater_equal and current_node.greater:
+                    queue.append((current_node.greater, depth+1))
+                elif has_lesser and current_node.lesser:
+                    queue.append((current_node.greater, depth+1))
+            #Current node is greater/equal to some corners and less than some corners (or just equal)
+            if has_greater_equal or (has_greater_equal and has_lesser):
+                if area.contains(current_node.point) or area.intersects(current_node.point):
+                    return True
+                if current_node.greater:
+                    queue.append((current_node.greater, depth+1))
+                if current_node.lesser:
+                    queue.append((current_node.greater, depth+1))
+
+        return False
 
     def random_fill(self, count, min = -10, max = 10):
         for i in range(count):
-            self.insert(round(random(min,max),4), round(random(min,max),4))
+            self.insert(round(uniform(min,max),4), round(uniform(min,max),4))
     
