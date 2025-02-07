@@ -5,6 +5,7 @@ import time
 import random
 from shapely import Point
 from Navigation.directions import Steering, Motor
+from copy import deepcopy
 
 class Map():
     def __init__(self):
@@ -56,6 +57,7 @@ class Map():
 
     def move_car(self, steering, motor):
         self.remove_car()
+        old_car = deepcopy(self.car)
 
         if steering == Steering.LEFT:
             self.car.turn_left()
@@ -66,4 +68,11 @@ class Map():
         if motor == Motor.BACKWARD:
             self.car.move_backwards()
 
+        #Check if new position is valid
+        if not self.is_valid_movement():
+            self.car = old_car
+
         self.add_car()
+
+    def is_valid_movement(self):
+        return not self.tree.exists_in_area(self.car.get_car_area())

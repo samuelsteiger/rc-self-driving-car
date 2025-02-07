@@ -7,7 +7,7 @@ TURN_RADIUS = 3
 MOVE_DISTANCE = 1
 
 class Car():
-    def __init__(self, x=0, y=0, heading = 134):
+    def __init__(self, x=0, y=0, heading = 0):
         self.position = Point(x, y)
         self.heading = heading
 

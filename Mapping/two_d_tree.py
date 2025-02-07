@@ -1,4 +1,4 @@
-from node import Node
+from Mapping.node import Node
 from shapely import Polygon
 from random import uniform
 
@@ -122,30 +122,25 @@ class TwoDTree():
 
         while len(queue) > 0:
             current_node, depth = queue.pop(0)
-            has_greater_equal = False
-            has_lesser = False
+            is_greater_equal = False
+            is_lesser = False
 
             for point in points:
                 node = Node(point.x, point.y)
                 if current_node.is_greater_than_equal(node, depth):
-                    has_greater_equal = True
+                    is_greater_equal = True
                 else:
-                    has_lesser = True
+                    is_lesser = True
             
             #Current node is wholly greater/equal or lesser than the rectangle
-            if has_greater_equal ^ has_lesser:
-                if has_greater_equal and current_node.greater:
-                    queue.append((current_node.greater, depth+1))
-                elif has_lesser and current_node.lesser:
-                    queue.append((current_node.greater, depth+1))
+            if is_greater_equal and current_node.lesser:
+                queue.append((current_node.lesser, depth+1))
+            if is_lesser and current_node.greater:
+                queue.append((current_node.greater, depth+1))
             #Current node is greater/equal to some corners and less than some corners (or just equal)
-            if has_greater_equal or (has_greater_equal and has_lesser):
+            if is_greater_equal or (is_greater_equal and is_lesser):
                 if area.contains(current_node.point) or area.intersects(current_node.point):
                     return True
-                if current_node.greater:
-                    queue.append((current_node.greater, depth+1))
-                if current_node.lesser:
-                    queue.append((current_node.greater, depth+1))
 
         return False
 

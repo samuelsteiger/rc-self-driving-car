@@ -3,6 +3,7 @@ import sys
 import time
 from Mapping.map import Map 
 from Navigation.navigation import Navigation
+from Navigation.directions import Steering, Motor
 
 #How long one cycle of the control flow should take
 INTERVAL = 0.1
@@ -43,5 +44,5 @@ while True:
     end_time = time.time()
     #Find duration of this cycle in seconds
     elapsed_time = end_time - start_time
-    time.sleep(INTERVAL - elapsed_time)
+    time.sleep(max(INTERVAL - elapsed_time, 0))
 
