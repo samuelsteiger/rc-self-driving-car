@@ -29,7 +29,13 @@ class Map():
 
     def exists(self, x, y):
         return self.tree.exists(x, y)
+
+    def exists_in_area(self, points):
+        return self.tree.exists_in_area(points)
     
+    def get_map_area(self):
+        return (self.plot.xmin, self.plot.xmax, self.plot.ymin, self.plot.ymax)
+
     def print(self):
         print("\033c")
         print(self.plot.plot())
@@ -59,9 +65,9 @@ class Map():
         self.remove_car()
         old_car = deepcopy(self.car)
 
-        if steering == Steering.LEFT:
+        if steering == Steering.COUTNER_CLOCKWISE:
             self.car.turn_left()
-        if steering == Steering.RIGHT:
+        if steering == Steering.CLOCKWISE:
             self.car.turn_right()
         if motor == Motor.FORWARD:
             self.car.move_forwards()

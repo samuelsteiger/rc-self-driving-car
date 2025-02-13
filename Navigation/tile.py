@@ -7,6 +7,6 @@ class Tile():
         self.cost = None
 
     def __eq__(self, value):
-        if not isinstance(value):
+        if not isinstance(value, Tile):
             return False
         return self.center == value.center

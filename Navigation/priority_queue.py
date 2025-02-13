@@ -18,4 +18,9 @@ class PriorityQueue:
         self.queue.append((object, priority))
 
     def pop(self):
+        if len(self.queue) <= 0:
+            return (None, None)
         return self.queue.pop(0)
+    
+    def __len__(self):
+        return len(self.queue)

@@ -1,8 +1,9 @@
 import signal
 import sys
 import time
+from shapely import Point
 from Mapping.map import Map 
-from Navigation.navigation import Navigation
+from Navigation.navigation import Navigation, NavigationMode
 from Navigation.directions import Steering, Motor
 
 #How long one cycle of the control flow should take
@@ -20,13 +21,21 @@ key_press = None
 
 map = Map()
 
+
 for i in range(-9, 9, 1):
     map.insert(i, 9)
     map.insert(i, -9)
     map.insert(9, i)
     map.insert(-9, i)
 
-#keyboard.start()
+for i in range(-9, 6, 1):
+    map.insert(i, 3)
+
+for i in range(9, -6, -1):
+    map.insert(i, -3)
+
+nav = Navigation()
+nav.build_nav_mesh(map)
 
 while True:
     start_time = time.time()
@@ -37,7 +46,7 @@ while True:
 
     print(map.print())
     #Determine next movement
-    steering, motor = Navigation.random_move()
+    steering, motor  = nav.move(map.car.position, Point(7, -7))
     #Execute Movement
     map.move_car(steering, motor)
 

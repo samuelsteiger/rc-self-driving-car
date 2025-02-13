@@ -1,18 +1,20 @@
 from shapely import Point, Polygon
 from math import cos, sin, radians
 
-LENGTH = 5
-WIDTH = 2.5
-TURN_RADIUS = 3
-MOVE_DISTANCE = 1
+LENGTH = 1
+WIDTH = 0.5
+TURN_RADIUS = 45
+MOVE_DISTANCE = 0.5
 
 class Car():
-    def __init__(self, x=0, y=0, heading = 0):
+    def __init__(self, x=-7, y=7, heading = 90):
         self.position = Point(x, y)
         self.heading = heading
 
     def turn_right(self):
         self.heading = self.heading - TURN_RADIUS
+        if self.heading >= 360:
+            self.heading -= 360
         if self.heading < 0:
             self.heading += 360
 
@@ -20,6 +22,16 @@ class Car():
         self.heading = self.heading + TURN_RADIUS
         if self.heading >= 360:
             self.heading -= 360
+        if self.heading < 0:
+            self.heading += 360
+
+    def set_heading(self, heading):
+        self.heading = heading
+        if self.heading >= 360:
+            self.heading -= 360
+        if self.heading < 0:
+            self.heading += 360
+
 
     def move_forwards(self):
         x = (MOVE_DISTANCE * cos(radians(self.heading))) + self.position.x
