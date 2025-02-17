@@ -6,11 +6,14 @@ import random
 from shapely import Point
 from Navigation.directions import Steering, Motor
 from copy import deepcopy
+import os 
+
+WIDTH, HEIGHT = os.get_terminal_size()
 
 class Map():
     def __init__(self):
-        self.plot = plotille.Canvas(width=60, 
-                      height=20,
+        self.plot = plotille.Canvas(width= WIDTH,
+                      height= HEIGHT - 1,
                        xmin=-10,
                         ymin=-10,
                          xmax=10,
