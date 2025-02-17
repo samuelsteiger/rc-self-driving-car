@@ -47,17 +47,17 @@ class Car():
         x = self.position.x
         y = self.position.y
         #Front-Right Corner
-        x1 = x + (WIDTH/2) * cos(radians(self.heading)) + (LENGTH/2) * sin(radians(self.heading))
-        y1 = y + (WIDTH/2) * sin(radians(self.heading)) - (LENGTH/2) * cos(radians(self.heading))
+        x1 = x + (LENGTH/2) * cos(radians(self.heading)) + (WIDTH/2) * sin(radians(self.heading))
+        y1 = y + (LENGTH/2) * sin(radians(self.heading)) - (WIDTH/2) * cos(radians(self.heading))
         #Front-Left Corner
-        x2 = x + (WIDTH/2) * cos(radians(self.heading)) - (LENGTH/2) * sin(radians(self.heading))
-        y2 = y + (WIDTH/2) * sin(radians(self.heading)) + (LENGTH/2) * cos(radians(self.heading))
+        x2 = x + (LENGTH/2) * cos(radians(self.heading)) - (WIDTH/2) * sin(radians(self.heading))
+        y2 = y + (LENGTH/2) * sin(radians(self.heading)) + (WIDTH/2) * cos(radians(self.heading))
         #Back-Left Corner
-        x3 = x - (WIDTH/2) * cos(radians(self.heading)) - (LENGTH/2) * sin(radians(self.heading))
-        y3 = y - (WIDTH/2) * sin(radians(self.heading)) + (LENGTH/2) * cos(radians(self.heading))
+        x3 = x - (LENGTH/2) * cos(radians(self.heading)) - (WIDTH/2) * sin(radians(self.heading))
+        y3 = y - (LENGTH/2) * sin(radians(self.heading)) + (WIDTH/2) * cos(radians(self.heading))
         #Back-Right Corner
-        x4 = x - (WIDTH/2) * cos(radians(self.heading)) + (LENGTH/2) * sin(radians(self.heading))
-        y4 = y - (WIDTH/2) * sin(radians(self.heading)) - (LENGTH/2) * cos(radians(self.heading))
+        x4 = x - (LENGTH/2) * cos(radians(self.heading)) + (WIDTH/2) * sin(radians(self.heading))
+        y4 = y - (LENGTH/2) * sin(radians(self.heading)) - (WIDTH/2) * cos(radians(self.heading))
         #The four corners of the cars area
         points = [Point(x1,y1), Point(x2,y2), Point(x3,y3), Point(x4,y4)]
         return points
