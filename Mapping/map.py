@@ -11,7 +11,7 @@ import os
 WIDTH, HEIGHT = os.get_terminal_size()
 
 class Map():
-    def __init__(self):
+    def __init__(self, car_x = 0, car_y = 0, car_heading = 0):
         self.plot = plotille.Canvas(width= WIDTH,
                       height= HEIGHT - 1,
                        xmin=-10,
@@ -19,7 +19,7 @@ class Map():
                          xmax=10,
                           ymax=10)
         self.tree = TwoDTree()
-        self.car = Car()
+        self.car = Car(x = car_x, y = car_y, heading = car_heading)
         self.add_car()
 
     def insert(self, x, y):

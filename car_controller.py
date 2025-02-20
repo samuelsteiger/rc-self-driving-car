@@ -19,7 +19,7 @@ signal.signal(signal.SIGINT, sigint_handler)
 #Setup Controller
 key_press = None
 
-map = Map()
+map = Map(car_x=-7, car_y=7, car_heading=0)
 
 
 for i in range(-9, 9, 1):
