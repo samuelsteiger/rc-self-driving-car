@@ -12,12 +12,12 @@ WIDTH, HEIGHT = os.get_terminal_size()
 
 class Map():
     def __init__(self, car_x = 0, car_y = 0, car_heading = 0):
-        self.plot = plotille.Canvas(width= WIDTH,
-                      height= HEIGHT - 1,
-                       xmin=-10,
-                        ymin=-10,
-                         xmax=10,
-                          ymax=10)
+        self.plot = plotille.Canvas(width= WIDTH - 1,
+                      height= HEIGHT - 2,
+                       xmin=-10.1,
+                        ymin=-10.1,
+                         xmax=10.1,
+                          ymax=10.1)
         self.tree = TwoDTree()
         self.car = Car(x = car_x, y = car_y, heading = car_heading)
         self.add_car()
@@ -40,7 +40,7 @@ class Map():
         return (self.plot.xmin, self.plot.xmax, self.plot.ymin, self.plot.ymax)
 
     def print(self):
-        print("\033c")
+        #print("\033c")
         print(self.plot.plot())
 
     def random_plot(self):

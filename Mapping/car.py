@@ -1,10 +1,10 @@
 from shapely import Point, Polygon
 from math import cos, sin, radians
 
-LENGTH = 1
-WIDTH = 0.5
+LENGTH = 0.25
+WIDTH = 0.25
 TURN_RADIUS = 45
-MOVE_DISTANCE = 0.5
+MOVE_DISTANCE = 0.2
 
 class Car():
     def __init__(self, x=-7, y=7, heading = 90):
